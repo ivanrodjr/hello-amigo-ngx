@@ -1,7 +1,6 @@
 <header class="header">
     <span class="header__inner">
         {{ partial "logo.html" . }}
-
         <span class="header__right">
             {{ if len .Site.Menus }}
                 {{ partial "menu.html" . }}
@@ -12,8 +11,16 @@
                     </svg>
                 </span>
             {{ end }}
-
-            <span class="theme-toggle unselectable">{{ partial "theme-icon.html" . }}</span>
+            <span class="theme-toggle unselectable">{{ partial "theme-icon.html" . }}</span>    
+            {{ if .IsTranslated }}
+                {{ range .Translations }}
+                    <a class="logo2" href="{{ .Permalink }}">{{ .Site.Language.LanguageName }}</a>
+            {{ end }}
+            {{ else }}
+                {{ if eq .Site.Language.Lang "en" }}
+                    <a class="logo2" href="/">English</a>
+            {{ end }}
+            {{ end }}          
         </span>
-    </span>
+      </span> 
 </header>
